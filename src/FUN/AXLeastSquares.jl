@@ -10,7 +10,7 @@ struct AXLeastSquares <: AXEstimator
     X::Matrix{Float32} # Covariates
 
     # Constructor Function
-    function AXLeastSquares(y::Array{Float64}, X::Array{Float64})
+    function AXLeastSquares(y::Matrix{Float32}, X::Matrix{Float32})
         β = (X' * X)^(-1) * (X' * y)
         new(β, y, X)
     end

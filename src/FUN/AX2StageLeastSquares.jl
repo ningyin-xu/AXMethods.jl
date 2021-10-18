@@ -10,8 +10,8 @@ struct AX2StageLeastSquares <: AXEstimator
     X::Matrix{Float32} # combined second stage variables
 
 	# Define constructor function
-	function AX2StageLeastSquares(y::Array{Float64}, D::Array{Float64},
-                                  instrument::Array{Float64}, control = nothing)
+	function AX2StageLeastSquares(y::Matrix{Float32}, D::Matrix{Float32},
+                                  instrument::Matrix{Float32}, control = nothing)
         # Add constant if no control is passed
         if isnothing(control) control = ones(length(y)) end
 
