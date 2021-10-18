@@ -6,11 +6,11 @@ An Ordinary Least Squares implementation.
 
 struct AXLeastSquares <: AXEstimator
     β::Array{Float64} # Coefficient
-    y::Matrix{Float32} # Response
-    X::Matrix{Float32} # Covariates
+    y::Matrix{Float64} # Response
+    X::Matrix{Float64} # Covariates
 
     # Constructor Function
-    function AXLeastSquares(y::Matrix{Float32}, X::Matrix{Float32})
+    function AXLeastSquares(y::Matrix{Float64}, X::Matrix{Float64})
         β = (X' * X)^(-1) * (X' * y)
         new(β, y, X)
     end

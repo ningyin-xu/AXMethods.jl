@@ -5,13 +5,13 @@ A simple two stage least squares implementation.
 struct AX2StageLeastSquares <: AXEstimator
     β::Array{Float64} # coefficient
     FS::Array{Float64} # first stage coefficients
-    y::Matrix{Float32} # response
-	Z::Matrix{Float32} # combined first stage variables
-    X::Matrix{Float32} # combined second stage variables
+    y::Matrix{Float64} # response
+	Z::Matrix{Float64} # combined first stage variables
+    X::Matrix{Float64} # combined second stage variables
 
 	# Define constructor function
-	function AX2StageLeastSquares(y::Matrix{Float32}, D::Matrix{Float32},
-                                  instrument::Matrix{Float32}, control = nothing)
+	function AX2StageLeastSquares(y::Matrix{Float64}, D::Matrix{Float64},
+                                  instrument::Matrix{Float64}, control = nothing)
         # Add constant if no control is passed
         if isnothing(control) control = ones(length(y)) end
 
