@@ -5,9 +5,9 @@ A simple two stage least squares implementation.
 struct AX2StageLeastSquares <: AXEstimator
     β::Array{Float64} # coefficient
     FS::Array{Float64} # first stage coefficients
-    y::Array{Float64} # response
-	Z::Array{Float64} # combined first stage variables
-    X::Array{Float64} # combined second stage variables
+    y::Matrix{Float32} # response
+	Z::Matrix{Float32} # combined first stage variables
+    X::Matrix{Float32} # combined second stage variables
 
 	# Define constructor function
 	function AX2StageLeastSquares(y::Array{Float64}, D::Array{Float64},

@@ -6,8 +6,8 @@ An Ordinary Least Squares implementation.
 
 struct AXLeastSquares <: AXEstimator
     β::Array{Float64} # Coefficient
-    y::Array{Float64} # Response
-    X::Array{Float64} # Covariates
+    y::Matrix{Float32} # Response
+    X::Matrix{Float32} # Covariates
 
     # Constructor Function
     function AXLeastSquares(y::Array{Float64}, X::Array{Float64})
