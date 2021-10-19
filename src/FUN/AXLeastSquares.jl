@@ -38,7 +38,7 @@ function infer(fit::AXLeastSquares; heteroskedastic::Bool=false, print_df::Bool=
         vcv = XX^(-1) .* (resid' * resid) ./ (N-K)
     end
 
-    se = sqrt.(Complex(vcv[diagind(vcv)]))
+    se = sqrt.(vcv[diagind(vcv)])
     t_stat = fit.β ./ se
     p_val = 2 * cdf.(Normal(), -abs.(t_stat))
     r2 = 1 - sum(resid.^2)/sum((y.-mean(y)).^2)
