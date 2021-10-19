@@ -41,15 +41,16 @@ function infer(fit::AXLeastSquares; heteroskedastic::Bool=false, print_df::Bool=
     se = sqrt.(vcv[diagind(vcv)])
     t_stat = fit.β ./ se
     p_val = 2 * cdf.(Normal(), -abs.(t_stat))
+    r2 = 1 - sum(resid.^2)/sum((y.-mean(y)).^2)
 
     # Print estimates
     if print_df
-        out_df = DataFrame(hcat(fit.β, se, t_stat, p_val), :auto)
-        rename!(out_df, ["coef", "se", "t-stat", "p-val"])
+        out_df = DataFrame(hcat(fit.β, se, t_stat, p_val, r2), :auto)
+        rename!(out_df, ["coef", "se", "t-stat", "p-val", "R-sqaure"])
         display(out_df)
     end
 
     # Organize and return output
-    output = (β = fit.β, se = se, t = t_stat, p = p_val)
+    output = (β = fit.β, se = se, t = t_stat, p = p_val, r = r2)
     return output
 end #infer.AXLeastSquares
