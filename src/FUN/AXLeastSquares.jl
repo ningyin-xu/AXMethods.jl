@@ -11,7 +11,7 @@ struct AXLeastSquares <: AXEstimator
 
     # Constructor Function
     function AXLeastSquares(y::Matrix{Float64}, X::Matrix{Float64})
-        β = (X' * X)^(-1) * (X' * y)
+        β = inv(X' * X) * (X' * y)
         new(β, y, X)
     end
 end #AXLeastSquares
@@ -32,10 +32,10 @@ function infer(fit::AXLeastSquares; heteroskedastic::Bool=false, print_df::Bool=
     XX     = fit.X' * fit.X
     residX = fit.X .* resid
     if heteroskedastic
-        vcv = XX^(-1) * (residX' * residX) * XX^(-1) .* (N / (N-K))
+        vcv = inv(XX) * (residX' * residX) * inv(XX) .* (N / (N-K))
     else
         # homoskedasticity
-        vcv = XX^(-1) .* (resid' * resid) ./ (N-K)
+        vcv = inv(XX) .* (resid' * resid) ./ (N-K)
     end
 
     se = sqrt.(diag(vcv))

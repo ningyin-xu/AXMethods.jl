@@ -21,8 +21,8 @@ struct AX2StageLeastSquares <: AXEstimator
 
 		# Calculate TSLS coefficient
         PZ = Z * (Z' * Z)^(-1) * Z'
-        β  = (X' * PZ * PZ * X)^(-1) * (X' * PZ * y)
-        FS = (Z' * Z)^(-1) * (Z' * X)
+        β  = inv(X' * PZ * PZ * X) * (X' * PZ * y)
+        FS = inv(Z' * Z) * (Z' * X)
 
 		# Return output
 		new(β, FS, y, Z, X)
